@@ -23,6 +23,7 @@ stage('Deploy approval'){
 
 stage 'Deploy'
 	node('master') {
-    	echo "deploying"
+    	echo "deploying";
+    	echo $VERSION;
 	}
 
