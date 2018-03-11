@@ -1,4 +1,4 @@
-pipeline {
+
 
 environment {
 	TESTE = 'aa'
@@ -13,17 +13,9 @@ stage 'Checkout'
 
 stage 'Build & Archive Apk'
 	node('master') {
-  	sh 'export ANDROID_SERIAL=192.168.56.101:5555 ; echo $VERSION > build.txt'
+  	sh 'export ANDROID_SERIAL=192.168.56.101:5555 ; echo "$VERSION $TESTE" > build.txt'
   	step([$class: 'ArtifactArchiver', artifacts: 'build.txt'])
 	}
-
- stage ('Restore packages'){
-        steps {
-            script{
-            echo "${VERSION}"
-         }
-      }
-   }
 
 
 stage 'Deploy'
@@ -31,4 +23,3 @@ stage 'Deploy'
      echo "deploying"
 	}
 
-}
