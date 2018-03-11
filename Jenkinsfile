@@ -14,13 +14,16 @@ stage 'Build & Archive Apk'
   	step([$class: 'ArtifactArchiver', artifacts: 'build.txt'])
 	}
 
+steps {
+  sh 'echo "$VERSION"';  
+}
+
 stage('Deploy approval'){
 	input "Deploy to prod?"
 }
 
 stage 'Deploy'
 	node('master') {
-		  echo VERSION
     	echo "deploying"
     	sh 'echo  "$VERSION;"'
 	}
