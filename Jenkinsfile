@@ -1,9 +1,9 @@
+pipeline {
+
 environment {
 	TESTE = 'aa'
 	VERSION = VersionNumber projectStartDate: '2017-01-01', versionNumberString: 'freya', versionPrefix: '2.0.', worstResultForIncrement: 'FAILURE'
 }
-
-
 
 stage 'Checkout'
 	node('master') {
@@ -24,12 +24,11 @@ stage 'Build & Archive Apk'
          }
       }
    }
-stage('Deploy approval'){
-	input "Deploy to prod?"
-}
+
 
 stage 'Deploy'
 	node('master') {
      echo "deploying"
 	}
 
+}
