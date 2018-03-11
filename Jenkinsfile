@@ -1,8 +1,5 @@
 environment {
-  VERSION = VersionNumber([
-    versionNumberString : '${BUILD_YEAR}.${BUILD_MONTH}.${BUILD_ID}',
-    projectStartDate : '2014-05-19'
-  ]);
+	VERSION = VersionNumber([projectStartDate: '2017-05-12', skipFailedBuilds: true, versionNumberString: '${YEARS_SINCE_PROJECT_START, XX}.${BUILD_MONTH, XX}.${BUILDS_THIS_MONTH}', versionPrefix: 'v']);
 }
 
 stage 'Checkout'
@@ -23,7 +20,8 @@ stage('Deploy approval'){
 
 stage 'Deploy'
 	node('master') {
-    	echo "deploying";
+		  echo VERSION
+    	echo "deploying"
     	sh 'echo  "$VERSION;"'
 	}
 
