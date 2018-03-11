@@ -17,15 +17,19 @@ stage 'Build & Archive Apk'
   	step([$class: 'ArtifactArchiver', artifacts: 'build.txt'])
 	}
 
-
+ stage ('Restore packages'){
+        steps {
+            script{
+            echo "${VERSION}"
+         }
+      }
+   }
 stage('Deploy approval'){
 	input "Deploy to prod?"
 }
 
 stage 'Deploy'
 	node('master') {
-		 echo "${TESTE}"
-		 echo "${VERSION}"
      echo "deploying"
 	}
 
