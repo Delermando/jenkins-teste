@@ -1,6 +1,9 @@
 environment {
-	VERSION = VersionNumber([projectStartDate: '2017-05-12', skipFailedBuilds: true, versionNumberString: '${YEARS_SINCE_PROJECT_START, XX}.${BUILD_MONTH, XX}.${BUILDS_THIS_MONTH}', versionPrefix: 'v']);
+	TESTE = 'aa'
+	VERSION = VersionNumber projectStartDate: '2017-01-01', versionNumberString: 'freya', versionPrefix: '2.0.', worstResultForIncrement: 'FAILURE'
 }
+
+
 
 stage 'Checkout'
 	node('master') {
@@ -14,9 +17,6 @@ stage 'Build & Archive Apk'
   	step([$class: 'ArtifactArchiver', artifacts: 'build.txt'])
 	}
 
-steps {
-  sh 'echo "$VERSION"';  
-}
 
 stage('Deploy approval'){
 	input "Deploy to prod?"
@@ -24,7 +24,8 @@ stage('Deploy approval'){
 
 stage 'Deploy'
 	node('master') {
-    	echo "deploying"
-    	sh 'echo  "$VERSION;"'
+		 echo "${TESTE}"
+		 echo "${VERSION}"
+     echo "deploying"
 	}
 
